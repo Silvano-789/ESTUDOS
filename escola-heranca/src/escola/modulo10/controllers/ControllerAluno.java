@@ -9,6 +9,8 @@ import escola.modulo10.objetos.Diciplina;
 public class ControllerAluno {
 	
 	List<Aluno> listaAluno = new ArrayList<Aluno>();
+	double[] vetnotas = new double[4];
+	Diciplina dic = new Diciplina();
 	
 	public void areaAluno() {		
 		int op=0;
@@ -28,10 +30,16 @@ public class ControllerAluno {
 			aluno.setEndereco(JOptionPane.showInputDialog("Endereço aluno:"));
 			aluno.setSerie(JOptionPane.showInputDialog("Série aluno:"));
 			
-			for(int i=1; i<5; i++) {
+			for(int i=1; i<2; i++) {
 				Diciplina diciplina = new Diciplina();
 				diciplina.setDiciplina(JOptionPane.showInputDialog("Nome da diciplina "+i));
-				diciplina.setNota(Double.parseDouble(JOptionPane.showInputDialog("Nota da diciplina "+i)));
+				for(int a=0; a<diciplina.getNota().length; a++) {
+					String notas =(JOptionPane.showInputDialog("Nota da diciplina "+i));
+					vetnotas[a] = Double.parseDouble(notas);
+				
+				}
+				diciplina.setNota(vetnotas);
+				
 				
 				aluno.getDiciplinas().add(diciplina);
 			}
@@ -61,18 +69,26 @@ public class ControllerAluno {
 			boolean ver = true;
 			for (Aluno alunoS : listaAluno) {
 				if(alunoS.getNome().equalsIgnoreCase(busca)) {
-				JOptionPane.showMessageDialog(null, "Nome do Aluno: "+alunoS.getNome()
-				                                    +"\nSérie: "+alunoS.getSerie()+"º ano"
-				                                    +"\nEscola: "+alunoS.getNomeEscola()
-				                                    +"\n----------Diciplinas---------------"
-				                                    +"\n"+alunoS.getDiciplinas().toString().replace("[", "").replace("]", "").replace(",", "")
-				                                    +"\nMédia: "+alunoS.calcMedia()
-				                                    +"\nSituação: "+alunoS.situacaoAluno()
-				                                    +"\n.........sis School 2020........."
-				                                    ,  "Boletim Escolar", 1);
-													ver = false;
+					  StringBuilder imprime = new StringBuilder();
+					    		imprime.append("Nome do Aluno: "+alunoS.getNome());
+					      		imprime.append("\nSérie: "+alunoS.getSerie()+"º ano");
+					      		imprime.append("\nEscola: "+alunoS.getNomeEscola());
+					      		imprime.append("\n----------Diciplinas---------------");
+					      		imprime.append("\n"+alunoS.getDiciplinas().toString().replace("[", "").replace("]", "").replace(",",""));
+					      		imprime.append("\n----------Notas---------------");
+					      		for(Diciplina d: alunoS.getDiciplinas()) {
+									  	for(int i=0; i<dic.getNota().length; i++) {
+									  		imprime.append("\nNota "+(i+1)+"º bimestre: "+d.getNota()[i]);
+								   }  	    
+								  }
+					      		imprime.append("\nMédia: "+alunoS.calcMedia());
+					      		imprime.append("\nSituação: "+alunoS.situacaoAluno());
+					      		imprime.append("\n.........sis School 2020.........");
+								   
+					      		JOptionPane.showMessageDialog(null, imprime.toString());
 				}
 			}
+			
 			if(ver) {
 				JOptionPane.showMessageDialog(null, "Aluno não encontrado! \nverifique na lista de alunos no menu.", "Atenção", 0);				
 			}

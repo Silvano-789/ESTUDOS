@@ -1,15 +1,19 @@
 package escola.modulo10.sistema;
 
+import javax.swing.JOptionPane;
+
 public class ArrayVetor {
 
 	public static void main(String[] args) {
 		
-		double[] notas = new double [4];
-		
-		notas[0] = 5.2;
-		notas[1] = 5;
-		notas[2] = 5.0;
-		notas[3] = 8.0;
+		int pos = Integer.parseInt(JOptionPane.showInputDialog("Qual o tamanho do vetor:"));
+		double[] notas = new double [pos];
+	
+		for(int posi=0; posi<notas.length; posi++) {
+			double nota = Double.parseDouble(JOptionPane.showInputDialog("Digite a nota "+(posi+1)+":"));
+			notas[posi] = nota;
+		}
+				
 		//System.out.println(notas[0]+"\n"+notas[1]+"\n"+notas[2]+"\n"+notas[3]);
         System.out.println("------------for-----------------");
 		for(int i=0; i<notas.length; i++) {
