@@ -87,6 +87,7 @@ public class ControllerAluno {
 								   
 					      		JOptionPane.showMessageDialog(null, imprime.toString());
 				}
+				ver = false;
 			}
 			
 			if(ver) {
