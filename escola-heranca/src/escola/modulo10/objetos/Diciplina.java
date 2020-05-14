@@ -3,6 +3,7 @@ package escola.modulo10.objetos;
 import java.util.Arrays;
 
 public class Diciplina {
+			
 	double[] nota = new double[4];
 	String diciplina;
 
@@ -48,25 +49,10 @@ public class Diciplina {
 			return false;
 		return true;
 	}
-	
-	public String retornaNota() {
-		for (int i = 0; i < nota.length; i++) {
-			 
-		}
-		return "";
-	}
 
 	@Override
 	public String toString() {
-		return  "Diciplina:"+diciplina;
+		return "Diciplina: "+ diciplina;
 	}
-
-	double media = 0;
-    public double calcMedia() {
-    	for(int i=0; i<nota.length; i++) {
-    	   media += nota[i];
-    	}
-    	return media/nota.length;
-    }
-	
+    
 }

@@ -10,6 +10,7 @@ public class Aluno extends Pessoa {
   private String dataMatricula;
   
 	List<Diciplina> diciplinas = new ArrayList<Diciplina>();
+	Diciplina dic = new Diciplina();
 	
 	public List<Diciplina> getDiciplinas() {
 			return diciplinas;
@@ -82,11 +83,12 @@ public class Aluno extends Pessoa {
 	
 	public double calcMedia() {
 		double media = 0.0;
-		for (Diciplina diciplina : diciplinas) {
-			media += diciplina.calcMedia();
+		for (Diciplina diciplina : getDiciplinas()) {
+			for(int a=0; a<diciplina.getNota().length; a++) {
+				media += diciplina.getNota()[a]/diciplina.getNota().length;		
+			}
 		}
-		
-		return media/diciplinas.size();
+	    return media;
 	}
 
 	public String situacaoAluno() {

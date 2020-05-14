@@ -9,7 +9,7 @@ import escola.modulo10.objetos.Diciplina;
 public class ControllerAluno {
 	
 	List<Aluno> listaAluno = new ArrayList<Aluno>();
-	double[] vetnotas = new double[4];
+	
 	Diciplina dic = new Diciplina();
 	
 	public void areaAluno() {		
@@ -24,6 +24,7 @@ public class ControllerAluno {
 		 switch (op) {
 		case 1:
 			Aluno aluno = new Aluno();
+			double[] vetnotas = new double[4];
 			aluno.setNome(JOptionPane.showInputDialog("Nome do aluno:"));
 			aluno.setNomeEscola(JOptionPane.showInputDialog("Nome da escola:"));
 			aluno.setDataMatricula(JOptionPane.showInputDialog("Data da matricula:"));
@@ -34,13 +35,11 @@ public class ControllerAluno {
 				Diciplina diciplina = new Diciplina();
 				diciplina.setDiciplina(JOptionPane.showInputDialog("Nome da diciplina "+i));
 				for(int a=0; a<diciplina.getNota().length; a++) {
-					String notas =(JOptionPane.showInputDialog("Nota da diciplina "+i));
+					String notas =(JOptionPane.showInputDialog("Nota do "+(a+1)+"º bimestre:"));
 					vetnotas[a] = Double.parseDouble(notas);
-				
+					
 				}
 				diciplina.setNota(vetnotas);
-				
-				
 				aluno.getDiciplinas().add(diciplina);
 			}
 			
