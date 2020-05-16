@@ -9,9 +9,7 @@ import escola.modulo10.objetos.Diciplina;
 public class ControllerAluno {
 	
 	List<Aluno> listaAluno = new ArrayList<Aluno>();
-	
-	Diciplina dic = new Diciplina();
-	
+
 	public void areaAluno() {		
 		int op=0;
 		while(op != 5) {
@@ -24,28 +22,28 @@ public class ControllerAluno {
 		 switch (op) {
 		case 1:
 			Aluno aluno = new Aluno();
-			double[] vetnotas = new double[4];
+			
 			aluno.setNome(JOptionPane.showInputDialog("Nome do aluno:"));
 			aluno.setNomeEscola(JOptionPane.showInputDialog("Nome da escola:"));
 			aluno.setDataMatricula(JOptionPane.showInputDialog("Data da matricula:"));
 			aluno.setEndereco(JOptionPane.showInputDialog("Endereço aluno:"));
 			aluno.setSerie(JOptionPane.showInputDialog("Série aluno:"));
 			
-			for(int i=1; i<2; i++) {
+			for(int i=0; i<2; i++) {
+				double[] vetnotas = new double[4];
 				Diciplina diciplina = new Diciplina();
-				diciplina.setDiciplina(JOptionPane.showInputDialog("Nome da diciplina "+i));
+				diciplina.setDiciplina(JOptionPane.showInputDialog("Nome da diciplina "+(i+1)));
 				for(int a=0; a<diciplina.getNota().length; a++) {
-					String notas =(JOptionPane.showInputDialog("Nota do "+(a+1)+"º bimestre:"));
-					vetnotas[a] = Double.parseDouble(notas);
+					String nota =(JOptionPane.showInputDialog("Nota do "+(a+1)+"º bimestre:"));
+					vetnotas[a] = Double.parseDouble(nota);
 					
 				}
 				diciplina.setNota(vetnotas);
+			    
 				aluno.getDiciplinas().add(diciplina);
 			}
-			
 			listaAluno.add(aluno);
 			JOptionPane.showMessageDialog(null, "Aluno salvo com sucesso!", "Salvar", 1);
-			
 			break;
 		case 2:
 
@@ -73,18 +71,34 @@ public class ControllerAluno {
 					      		imprime.append("\nSérie: "+alunoS.getSerie()+"º ano");
 					      		imprime.append("\nEscola: "+alunoS.getNomeEscola());
 					      		imprime.append("\n----------Diciplinas---------------");
-					      		imprime.append("\n"+alunoS.getDiciplinas().toString().replace("[", "").replace("]", "").replace(",",""));
-					      		imprime.append("\n----------Notas---------------");
 					      		for(Diciplina d: alunoS.getDiciplinas()) {
-									  	for(int i=0; i<dic.getNota().length; i++) {
+						      		imprime.append("\nDiciplina: "+d.getDiciplina());
+						      		imprime.append("\n----------Notas---------------");
+						      		    double aux = 0;
+						      		    double menor = 0;
+									  	for(int i=0; i<d.getNota().length; i++) {
 									  		imprime.append("\nNota "+(i+1)+"º bimestre: "+d.getNota()[i]);
-								   }  	    
+									  		if(i == 0) {
+									  		   aux = d.getNota()[i];	
+									  		}else if(d.getNota()[i] > aux) {
+									  		   aux = d.getNota()[i];
+									  		}
+									  		if(i == 0) {
+										  		   menor = d.getNota()[i];	
+										  		}else if(d.getNota()[i] < menor) {
+										  		   menor = d.getNota()[i];
+										  		}
+								   }
+									imprime.append("\nMaior nota: "+aux);
+									imprime.append("\nMenor nota: "+menor);
+									imprime.append("\nMédia: "+alunoS.calcMedia());
 								  }
-					      		imprime.append("\nMédia: "+alunoS.calcMedia());
+					      		
+					      		
 					      		imprime.append("\nSituação: "+alunoS.situacaoAluno());
 					      		imprime.append("\n.........sis School 2020.........");
 								   
-					      		JOptionPane.showMessageDialog(null, imprime.toString());
+					      		JOptionPane.showMessageDialog(null, imprime.toString(), "Boletim escolar", 1);
 				}
 				ver = false;
 			}

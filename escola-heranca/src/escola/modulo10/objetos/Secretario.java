@@ -93,7 +93,7 @@ public boolean autenticar(String login, String senha) {
 @Override
 public boolean autenticar() {
 	// TODO Auto-generated method stub
-	return usuario.equals("secretario") && senha.equals("1234");
+	return usuario.equals("adm") && senha.equals("123");
 }
 
 }

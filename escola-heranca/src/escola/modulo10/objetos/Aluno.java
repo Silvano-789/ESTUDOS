@@ -82,13 +82,14 @@ public class Aluno extends Pessoa {
 	}
 	
 	public double calcMedia() {
-		double media = 0.0;
-		for (Diciplina diciplina : getDiciplinas()) {
-			for(int a=0; a<diciplina.getNota().length; a++) {
-				media += diciplina.getNota()[a]/diciplina.getNota().length;		
-			}
+  double media = 0;
+   for (Diciplina dici : diciplinas) {
+        media = 0;
+			for(int a=0; a<dici.getNota().length; a++) {
+				media += dici.getNota()[a];	
+			}			
 		}
-	    return media;
+	    return media/dic.getNota().length;
 	}
 
 	public String situacaoAluno() {
