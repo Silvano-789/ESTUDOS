@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Diciplina {
 			
-	double[] nota = new double[4];
-	String diciplina;
+	private double[] nota = new double[4];
+	private String diciplina;
 
 	public String getDiciplina() {
 		return diciplina;

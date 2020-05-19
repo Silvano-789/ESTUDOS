@@ -12,13 +12,14 @@ public class ControllerAluno {
 
 	public void areaAluno() {		
 		int op=0;
-		while(op != 5) {
+		while(op != 6) {
 		 op = Integer.parseInt(JOptionPane.showInputDialog("-- Area do Aluno --"
 		 												+ "\n1 >> Cadastrar aluno"
 		 												+ "\n2 >> Listar Alunos"
 		 												+ "\n3 >> Boletim escolar"
 		 												+ "\n4 >> Remover"
-		 												+ "\n5 >> Sair"));
+		 												+ "\n5 >> Dici"
+		 												+ "\n6 >> Sair"));
 		 switch (op) {
 		case 1:
 			Aluno aluno = new Aluno();
@@ -127,6 +128,14 @@ public class ControllerAluno {
 			break;
 			
 			case 5:
+				Aluno alu = new Aluno();
+				for(Diciplina diciplinas : alu.getDiciplinas()) {
+					JOptionPane.showMessageDialog(null, diciplinas.toString());
+				}
+				break;
+				
+			case 6:
+				
 				break;
 		default:
 			break;
