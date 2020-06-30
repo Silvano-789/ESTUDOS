@@ -2,15 +2,10 @@ package escola.modulo10.objetos;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import escola.modulo10.status.StatusAluno;
-
 public class Aluno extends Pessoa {
   private String serie;
   private String nomeEscola;
   private String dataMatricula;
-  double[] recebeNotas = new double[4];
 	List<Diciplina> diciplinas = new ArrayList<Diciplina>();
 	Diciplina dic = new Diciplina();
 	
@@ -81,34 +76,6 @@ public class Aluno extends Pessoa {
 		return "Aluno [serie=" + serie + ", nomeEscola=" + nomeEscola + ", dataMatricula=" + dataMatricula
 				+ ", diciplinas=" + diciplinas + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone
 				+ "]";
-	}
-	
-	
-	public double calcMedia() {
-    double media = 0.0;
-    /*foreach varre a lista de disciplinas*/
-    int cont =0;
-    for (Diciplina dici : getDiciplinas()) {
-    	  /*for para varrer o vetor de notas*/
-    	  for(int i=0; i<dici.getNota().length; i++) {
-    		  /*pega valores do vetor e soma em media*/
-    		  media += dici.getNota()[i];
-    	  }
-    	  cont++;
-		}
-        /*retorna o valor de media dividindo por 4*/
-		return media/(cont*4);
-	}
-
-	public String situacaoAluno() {
-		if(calcMedia() >= 50) {
-			if(calcMedia()>= 70) {
-				return StatusAluno.APROVADO;			
-			}
-			    return StatusAluno.RECUPERACAO;
-		}else {
-		       return	StatusAluno.REPROVADO;
-		}
 	}
 
 	@Override

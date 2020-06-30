@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import escola.modulo10.objetos.Aluno;
 import escola.modulo10.objetos.Diciplina;
+import escola.modulo10.status.StatusAluno;
 
 public class ControllerAluno {
 	
@@ -18,7 +19,7 @@ public class ControllerAluno {
 		 												+ "\n2 >> Listar Alunos"
 		 												+ "\n3 >> Boletim escolar"
 		 												+ "\n4 >> Remover"
-		 												+ "\n5 >> Dici"
+		 												+ "\n5 >> Lista aprovação"
 		 												+ "\n6 >> Sair"));
 		 switch (op) {
 		case 1:
@@ -65,6 +66,7 @@ public class ControllerAluno {
 		case 3:
 			String busca = JOptionPane.showInputDialog("Informe o nome do aluno:");
 			boolean ver = true;
+			
 			for (Aluno alunoS : listaAluno) {
 				if(alunoS.getNome().equalsIgnoreCase(busca)) {
 					  StringBuilder imprime = new StringBuilder();
@@ -72,11 +74,14 @@ public class ControllerAluno {
 					      		imprime.append("\nSérie: "+alunoS.getSerie()+"º ano");
 					      		imprime.append("\nEscola: "+alunoS.getNomeEscola());
 					      		imprime.append("\n----------Diciplinas---------------");
+					      		/**/
+					      		
 					      		for(Diciplina d: alunoS.getDiciplinas()) {
 						      		imprime.append("\nDiciplina: "+d.getDiciplina());
 						      		imprime.append("\n----------Notas---------------");
 						      		    double aux = 0;
 						      		    double menor = 0;
+						      		    double media = 0;
 									  	for(int i=0; i<d.getNota().length; i++) {
 									  		imprime.append("\nNota "+(i+1)+"º bimestre: "+d.getNota()[i]);
 									  		if(i == 0) {
@@ -89,16 +94,17 @@ public class ControllerAluno {
 										  		}else if(d.getNota()[i] < menor) {
 										  		   menor = d.getNota()[i];
 										  		}
+									  
+									  		media += d.getNota()[i]/4;
+									  		
 								   }
+									imprime.append("\nMédia: "+media);
 									imprime.append("\nMaior nota: "+aux);
 									imprime.append("\nMenor nota: "+menor);
-									imprime.append("\nMédia: "+alunoS.calcMedia());
+									
 								  }
 					      		
-					      		
-					      		imprime.append("\nSituação: "+alunoS.situacaoAluno());
-					      		imprime.append("\n.........sis School 2020.........");
-								   
+					      		imprime.append("\n.........sis School 2020.........");  
 					      		JOptionPane.showMessageDialog(null, imprime.toString(), "Boletim escolar", 1);
 				}
 				ver = false;
@@ -128,9 +134,36 @@ public class ControllerAluno {
 			break;
 			
 			case 5:
-				Aluno alu = new Aluno();
-				for(Diciplina diciplinas : alu.getDiciplinas()) {
-					JOptionPane.showMessageDialog(null, diciplinas.toString());
+				String buscAluno = JOptionPane.showInputDialog("Informe o nome do aluno:");
+				boolean v = true;
+				int cont =0;
+				for (Aluno alun : listaAluno) {
+					StringBuilder imp = new StringBuilder();
+					if(alun.getNome().equalsIgnoreCase(buscAluno)) {
+						double m =0;
+						imp.append("---- Disciplinas ----");
+						for(Diciplina di : alun.getDiciplinas()) {
+							for(int b=0; b<di.getNota().length; b++) {
+								m += di.getNota()[b];
+							}
+							imp.append("\nDici: "+alun.getDiciplinas().get(cont));
+							if(m >= 70) {
+									imp.append("\nSitu: "+StatusAluno.APROVADO);
+							}else if(m >= 50 && m < 70) {
+									imp.append("\nSitu:"+StatusAluno.RECUPERACAO);
+							}else {
+								   imp.append("\nSitu: "+StatusAluno.REPROVADO);
+							}
+							cont ++;
+						  }
+						}
+						
+					  JOptionPane.showMessageDialog(null, imp.toString(), "Aprovação", 1);
+					  v = false;
+					  
+					}
+				if(v) {
+					JOptionPane.showMessageDialog(null, "Aluno não cadastrado!", "Atenção", 0);
 				}
 				break;
 				

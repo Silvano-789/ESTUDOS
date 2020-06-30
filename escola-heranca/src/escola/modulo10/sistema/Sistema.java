@@ -6,27 +6,15 @@ import escola.modulo10.controllers.ControllerDiretor;
 import escola.modulo10.controllers.ControllerSecretario;
 import escola.modulo10.funcoes.FuncaoAutenticao;
 import escola.modulo10.objetos.Secretario;
+import escola.modulo10.telas.Login;
 
 public class Sistema {
 
-	public static void main(String[] args) {
-	
-    for(int i=0; i<3; i++) {
-    	String user = JOptionPane.showInputDialog("Usuario:");
-    	String senha = JOptionPane.showInputDialog("Senha:");
-        
-    	
-    	if(new FuncaoAutenticao(new Secretario(user, senha)).autenticarUsuario()) {
-    		Menu();
-    		break;
-    	}else {
-    		JOptionPane.showMessageDialog(null, "Usuario ou senha invalido!", "Atenção", 0);
-    	}
-      }
-
+	public static void main(String[] args){	
+        Login login = new Login();
 	}
 
-	private static void Menu() {
+	public void Menu() {
 		ControllerDiretor control = new ControllerDiretor();
 		ControllerAluno controlA = new ControllerAluno();
 		ControllerSecretario controlS = new ControllerSecretario();

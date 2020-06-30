@@ -6,6 +6,7 @@ public class Diciplina {
 			
 	private double[] nota = new double[4];
 	private String diciplina;
+	private double media;
 
 	public String getDiciplina() {
 		return diciplina;
@@ -22,6 +23,15 @@ public class Diciplina {
 	public void setNota(double[] nota) {
 		this.nota = nota;
 	}
+	
+	public double getMedia() {
+		return media;
+	}
+
+	public void setMedia(double media) {
+		this.media = media;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,6 +58,13 @@ public class Diciplina {
 		if (!Arrays.equals(nota, other.nota))
 			return false;
 		return true;
+	}
+	public double setaMedia() {
+		media = 0;
+		for(int i=0; i<nota.length; i++) {
+			this.media += nota[i];
+		}
+		return media;
 	}
 
 	@Override
